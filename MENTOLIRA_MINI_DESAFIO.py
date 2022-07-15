@@ -62,7 +62,9 @@ except:
 
 linha = 2
 for lista in values:
+    # Passo 3: Se o status n tá preenchido verificar o problema
     if len(lista) < 4:
+        # Passo 4: Enviar msg e registrar o novo status
         if lista[2] == 'Boleto Gerado':
             print('Enviar email para {}, email: {}'.format(lista[0], lista[1]))
 
@@ -133,8 +135,7 @@ for lista in values:
             except HttpError as error:
                 print(f"An error occurred: {error}")
     linha = linha + 1
-#Passo 3: Se o status n tá preenchido verificar o problema
-#Passo 4: Enviar msg e registrar o novo status
+
 
 
 
