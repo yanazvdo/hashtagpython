@@ -1,14 +1,29 @@
+from flask import Flask, render_template, url_for
+from forms import FormLogin, FormCriarConta
 
-import Contas_bancos
-from Contas_bancos import ContaCorrente, CartaoCredito
-from Agencia import AgenciaComum, AgenciaPremium, AgenciaVirtual, Agencia
+app = Flask(__name__)
 
-#PROGRAMA
+lista_usuarios = ['Lira', 'João', 'Alon', 'Alessandra', 'Amanda']
 
-# conta_lira = ContaCorrente('Lira', '000.000.000-00', 1234, 34062)
-# cartao_lira = CartaoCredito('Lira', conta_lira)
-# cartao_lira.senha = '123'
-# print(cartao_lira._senha)
-# print(conta_lira.__dict__)
+app.config['SECRET_KEY'] = 'fb9f6e231bdcb1exit769c4d347bfb7cde49'
 
-agencia_premium_especial = AgenciaPremium(123123123, 90000000000)
+@app.route("/")
+def home():
+    return render_template('home.html')
+
+@app.route("/contato")
+def contato():
+    return render_template('contato.html')
+
+@app.route("/usuarios")
+def usuarios():
+    return render_template('usuarios.html', lista_usuarios=lista_usuarios)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form_login = FormLogin()
+    form_criarconta = FormCriarConta()
+    return render_template('login.html', form_login=form_login, form_criarconta=form_criarconta)
+
+if __name__ == '__main__':
+    app.run(debug=True)
